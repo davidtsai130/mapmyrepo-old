@@ -3,14 +3,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-  entry: './src/app.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
-  },
+	entry: './src/app.js',
+	output: {
+		path: path.resolve(__dirname, 'build'),
+		filename: 'bundle.js',
+	},
 	module: {
 		rules: [
-			{test: /(\.scss|\.css)$/,
+			{
+				test: /(\.scss|\.css)$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
 					use: [
@@ -19,6 +20,11 @@ module.exports = {
 					],
 					publicPath: '/build',
 				})
+			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: 'babel-loader'
 			}
 		]
 	},
@@ -28,20 +34,20 @@ module.exports = {
 		open: true,
 		stats: 'errors-only',
 	},
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      title: 'React App Setup',
-      minify: {
-        collapseWhitespace: true,
-      },
-      hash: true,
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: './src/index.html',
+			title: 'React App Setup',
+			minify: {
+				collapseWhitespace: true,
+			},
+			hash: true,
 			inject: 'body',
-    }),
-    new ExtractTextPlugin({
-      filename: 'app.css',
-      disable: false,
-      allChunks: true,
-    }),
-  ]
+		}),
+		new ExtractTextPlugin({
+			filename: 'app.css',
+			disable: false,
+			allChunks: true,
+		}),
+	]
 }
