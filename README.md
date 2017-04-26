@@ -1,4 +1,3 @@
-# react-app-setup
+# Map My Repo
 
-Used as a learning tool to set up a React app from scratch.
-
+Map My Repo

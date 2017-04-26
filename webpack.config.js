@@ -1,9 +1,9 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-	entry: './src/app.js',
+	entry: './src/index.js',
 	output: {
 		path: path.resolve(__dirname, 'build'),
 		filename: 'bundle.js',
@@ -15,8 +15,18 @@ module.exports = {
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
 					use: [
-						{loader: 'css-loader'},
-						{loader: 'sass-loader'},
+						{
+							loader: 'css-loader',
+							options: {
+								modules: true,
+								sourceMap: true,
+								importLoaders: 1,
+								localIdentName: '[name]__[local]___[hash:base64:5]',
+							},
+						},
+						{
+							loader: 'postcss-loader'
+						},
 					],
 					publicPath: '/build',
 				})
