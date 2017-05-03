@@ -1,6 +1,6 @@
 import { addUser, addRepos } from '../actions'
 
-export function retrieveUserInfo() {
+export function retrieveUserAndRepos() {
 	return dispatch => {
 		fetch('https://api.github.com/users/davidtsai130').then((response) => {
 			return response.json()
@@ -12,5 +12,11 @@ export function retrieveUserInfo() {
 				dispatch(addRepos(repos))
 			})
 		})
+	}
+}
+
+export function retrieveContributors() {
+	return dispatch => {
+		// something
 	}
 }
