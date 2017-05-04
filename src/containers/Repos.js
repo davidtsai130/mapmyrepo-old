@@ -1,16 +1,16 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux'
 
+import RepoButton from '../components/RepoButton'
 import { retrieveContributors } from '../thunks'
 
 class Repos extends PureComponent {
 
 	get displayContributors() {
-		const repos = []
-		this.props.repos.forEach((repo, i) => {
-			repos.push(<div> {repo.name} </div>)
+		return this.props.repos.map((repo) => {
+			console.log(repo)
+			return <RepoButton key={repo.id} name={repo.name} />
 		})
-		return repos
 	}
 
 	render() {
