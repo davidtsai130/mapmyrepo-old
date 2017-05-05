@@ -11,3 +11,10 @@ export const addRepos = (repos) => {
 		repos,
 	}
 }
+
+export const updateInput = (value) => {
+	return {
+		type: 'UPDATE_INPUT',
+		value,
+	}
+}
