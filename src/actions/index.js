@@ -12,6 +12,13 @@ export const addRepos = (repos) => {
 	}
 }
 
+export const addContributors = (contributors) => {
+	return {
+		type: 'GET_CONTRIBUTORS',
+		contributors,
+	}
+}
+
 export const updateInput = (value) => {
 	return {
 		type: 'UPDATE_INPUT',

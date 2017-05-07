@@ -5,14 +5,22 @@ class RepoButton extends PureComponent {
 	render() {
 		return (
 			<div>
-				<Button key={this.props.id} label={this.props.name} accent/>
+				<Button
+					key={this.props.id}
+					label={this.props.repoName}
+					onClick={() => this.props.action(this.props.userName, this.props.repoName)}
+					accent
+				/>
 			</div>
 		)
 	}
 }
 
 RepoButton.propTypes = {
-	name: PropTypes.string,
+	id: PropTypes.number,
+	repoName: PropTypes.string,
+	userName: PropTypes.string,
+	action: PropTypes.func,
 }
 
 export default RepoButton

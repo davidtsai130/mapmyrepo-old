@@ -8,8 +8,7 @@ class Repos extends PureComponent {
 
 	get displayContributors() {
 		return this.props.repos.map((repo) => {
-			console.log(repo)
-			return <RepoButton key={repo.id} name={repo.name} />
+			return <RepoButton key={repo.id} userName={repo.owner.login} repoName={repo.name} action={this.props.retrieveContributors} />
 		})
 	}
 

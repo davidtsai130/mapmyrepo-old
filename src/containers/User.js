@@ -22,9 +22,9 @@ class User extends PureComponent {
 	render() {
 		return(
 			<div>
-				<Avatar title="Javier" image="https://placeimg.com/80/80/animals"/>
+				<Avatar title="Javier" image={this.props.user.avatar_url}/>
 				<Input type='text' hint='Enter Github Username' name='username' value={this.props.input} onChange={this.handleChange} />
-				<Button label='Submit' accent onClick={this.props.retrieveUserAndRepos}/>
+				<Button label='Submit' accent onClick={() => this.props.retrieveUserAndRepos(this.props.input)}/>
 			</div>
 		)
 	}
