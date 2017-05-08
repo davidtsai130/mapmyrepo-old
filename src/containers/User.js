@@ -40,7 +40,7 @@ User.propTypes = {
 export default connect(
 	state => {
 		return {
-			user: state.user,
+			user: state.contributers_info,
 			input: state.input,
 		}
 	},

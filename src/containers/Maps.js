@@ -1,17 +1,13 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 import _ from 'lodash'
 
 import FaSpinner from 'react-icons/lib/fa/spinner'
 import withScriptjs from 'react-google-maps/lib/async/withScriptjs'
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 
-/*
- * This is the modify version of:
- * https://developers.google.com/maps/documentation/javascript/examples/event-arguments
- *
- * Loaded using async loader.
- */
+import { retrieveUser } from '../thunks'
+
 const AsyncGettingStartedExampleGoogleMap = _.flowRight(
   withScriptjs,
   withGoogleMap,
@@ -31,7 +27,7 @@ const AsyncGettingStartedExampleGoogleMap = _.flowRight(
   </GoogleMap>
 ));
 
-export default class AsyncGettingStartedExample extends PureComponent {
+class Maps extends PureComponent {
 
 	constructor(props) {
 		super(props)
@@ -95,34 +91,55 @@ export default class AsyncGettingStartedExample extends PureComponent {
     });
   }
 
-  render() {
-    return (
-      <AsyncGettingStartedExampleGoogleMap
-        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key="
-        loadingElement={
-          <div style={{ height: `100%` }}>
-            <FaSpinner
-              style={{
-                display: `block`,
-                width: `80px`,
-                height: `80px`,
-                margin: `150px auto`,
-                animation: `fa-spin 2s infinite linear`,
-              }}
-            />
-          </div>
-        }
-        containerElement={
-        	<div style={{width: 800, height: 400}} />
-        }
-        mapElement={
-          <div style={{ height: `100%` }} />
-        }
-        onMapLoad={this.handleMapLoad}
-        onMapClick={this.handleMapClick}
-        markers={this.state.markers}
-        onMarkerRightClick={this.handleMarkerRightClick}
-      />
-    );
-  }
+	userLocation() {
+		this.props.contributors.forEach((contributor) => {
+			this.props.retrieveUser(contributor.login)
+		})
+		return this.props.locations
+	}
+
+	render() {
+		if (this.props.contributors.length > 0) {
+			console.log(this.state.markers)
+			return (
+				<AsyncGettingStartedExampleGoogleMap
+					googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key="
+					loadingElement={
+						<div style={{ height: `100%` }}>
+						<FaSpinner
+						style={{
+							display: `block`,
+							width: `80px`,
+							height: `80px`,
+							margin: `150px auto`,
+							animation: `fa-spin 2s infinite linear`,
+						}}
+						/>
+						</div>
+					}
+					containerElement={
+						<div style={{width: 800, height: 400}} />
+					}
+					mapElement={
+						<div style={{ height: `100%` }} />
+					}
+					onMapLoad={this.handleMapLoad}
+					onMapClick={this.handleMapClick}
+					markers={this.userLocation()}
+					onMarkerRightClick={this.handleMarkerRightClick}
+				/>
+			)
+		}
+		return null
+	}
 }
+
+export default connect(
+	state => {
+		return {
+			contributors: state.contributors,
+			locations: state.locations
+		}
+	},
+	{ retrieveUser }
+)(Maps)
