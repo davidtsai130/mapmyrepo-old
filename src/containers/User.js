@@ -5,7 +5,7 @@ import { Avatar } from 'react-toolbox/lib/avatar';
 import { Input } from 'react-toolbox/lib/input';
 
 import { updateInput } from '../actions'
-import { retrieveUserAndRepos } from '../thunks'
+import { retrieveRepos } from '../thunks'
 
 class User extends PureComponent {
 
@@ -24,7 +24,7 @@ class User extends PureComponent {
 			<div>
 				<Avatar title="Javier" image={this.props.user.avatar_url}/>
 				<Input type='text' hint='Enter Github Username' name='username' value={this.props.input} onChange={this.handleChange} />
-				<Button label='Submit' accent onClick={() => this.props.retrieveUserAndRepos(this.props.input)}/>
+				<Button label='Submit' accent onClick={() => this.props.retrieveRepos(this.props.input)}/>
 			</div>
 		)
 	}
@@ -34,7 +34,7 @@ User.propTypes = {
 	user: PropTypes.object,
 	input: PropTypes.string,
 	updateInput: PropTypes.func,
-	retrieveUserAndRepos: PropTypes.func,
+	retrieveRepos: PropTypes.func,
 }
 
 export default connect(
@@ -44,5 +44,5 @@ export default connect(
 			input: state.input,
 		}
 	},
-	{ updateInput, retrieveUserAndRepos }
+	{ updateInput, retrieveRepos }
 )(User)

@@ -1,16 +1,10 @@
-import _ from "lodash";
+import React, { PureComponent, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 
-import {
-  default as React,
-  Component,
-  PropTypes,
-} from "react";
-
-import FaSpinner from "react-icons/lib/fa/spinner";
-
-import withScriptjs from "react-google-maps/lib/async/withScriptjs"
-
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import FaSpinner from 'react-icons/lib/fa/spinner'
+import withScriptjs from 'react-google-maps/lib/async/withScriptjs'
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 
 /*
  * This is the modify version of:
@@ -37,7 +31,7 @@ const AsyncGettingStartedExampleGoogleMap = _.flowRight(
   </GoogleMap>
 ));
 
-export default class AsyncGettingStartedExample extends Component {
+export default class AsyncGettingStartedExample extends PureComponent {
 
 	constructor(props) {
 		super(props)
