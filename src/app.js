@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import User from './containers/User'
 import Repos from './containers/Repos'
+import Maps from './containers/Maps'
 
 class App extends PureComponent {
 
@@ -9,6 +10,7 @@ class App extends PureComponent {
 			<div>
 				<User />
 				<Repos />
+				<Maps />
 			</div>
 		)
 	}

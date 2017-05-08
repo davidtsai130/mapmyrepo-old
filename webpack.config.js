@@ -49,7 +49,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
-			title: 'React App Setup',
+			title: 'Map My Repo',
 			minify: {
 				collapseWhitespace: true,
 			},
