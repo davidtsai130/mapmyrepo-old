@@ -22,7 +22,7 @@ export const addContributors = (contributors) => {
 export const addLocations = (location) => {
 	return {
 		type: 'GET_LOCATIONS',
-		locations,
+		location,
 	}
 }
 

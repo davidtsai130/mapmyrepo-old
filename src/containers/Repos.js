@@ -6,7 +6,7 @@ import { retrieveContributors } from '../thunks'
 
 class Repos extends PureComponent {
 
-	get displayContributors() {
+	get displayRepos() {
 		return this.props.repos.map((repo) => {
 			return <RepoButton key={repo.id} userName={repo.owner.login} repoName={repo.name} action={this.props.retrieveContributors} />
 		})
@@ -15,7 +15,7 @@ class Repos extends PureComponent {
 	render() {
 		return(
 			<div>
-				{this.displayContributors}
+				{this.displayRepos}
 			</div>
 		)
 	}

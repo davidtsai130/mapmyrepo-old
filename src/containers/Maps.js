@@ -91,16 +91,18 @@ class Maps extends PureComponent {
     });
   }
 
-	userLocation() {
-		this.props.contributors.forEach((contributor) => {
-			this.props.retrieveUser(contributor.login)
-		})
-		return this.props.locations
-	}
+	// userLocation() {
+	// 	debugger
+	// 	if (this.props.contributors.length >= 1) {
+	// 		this.props.contributors.forEach((contributor) => {
+	// 			this.props.retrieveUser(contributor.login)
+	// 		})
+	// 	}
+	// 	return this.props.locations
+	// }
 
 	render() {
 		if (this.props.contributors.length > 0) {
-			console.log(this.state.markers)
 			return (
 				<AsyncGettingStartedExampleGoogleMap
 					googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key="
@@ -125,7 +127,7 @@ class Maps extends PureComponent {
 					}
 					onMapLoad={this.handleMapLoad}
 					onMapClick={this.handleMapClick}
-					markers={this.userLocation()}
+					markers={this.state.markers}
 					onMarkerRightClick={this.handleMarkerRightClick}
 				/>
 			)
@@ -137,7 +139,9 @@ class Maps extends PureComponent {
 export default connect(
 	state => {
 		return {
+			meta: state.app_meta,
 			contributors: state.contributors,
+			contributorsLocation: state.contributors_info,
 			locations: state.locations
 		}
 	},
